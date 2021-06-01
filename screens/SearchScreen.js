@@ -5,11 +5,13 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Switch,
+  ScrollView,
+  TextInput,
 } from "react-native";
 import React, { useState } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 const SearchScreen = ({ navigation }) => {
   return (
@@ -47,7 +49,66 @@ const SearchScreen = ({ navigation }) => {
           Search
         </Text>
       </View>
-      <Text>Searching</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: 15,
+        }}
+      >
+        <FontAwesome
+          name="search"
+          size={20}
+          color="#3D73AF"
+          style={{ right: -25, top: 1 }}
+        />
+        <TextInput
+          placeholder="Search Imam/Users"
+          placeholderTextColor="#3D73AF"
+          style={{
+            alignSelf: "center",
+            fontSize: 22,
+            textAlign: "center",
+            borderWidth: 1,
+            borderColor: "#3D73AF",
+            borderRadius: 5,
+            padding: 7,
+            width: "80%",
+            color: "#3D73AF",
+            left: -8,
+          }}
+        />
+      </View>
+      <View
+        style={{
+          backgroundColor: "rgba(0,0,0,0.1)",
+          borderColor: "#3D73AF",
+          borderWidth: 2,
+          width: "90%",
+          height: "80%",
+          margin: 50,
+          alignSelf: "center",
+          borderRadius: 15,
+          top: -30,
+        }}
+      >
+        <Text
+          style={{
+            textAlign: "center",
+            fontSize: 24,
+            color: "#3D73AF",
+            borderBottomColor: "#3D73AF",
+            borderBottomWidth: 2,
+            borderBottomRightRadius: 10,
+            borderBottomLeftRadius: 10,
+            width: "30%",
+            alignSelf: "center",
+          }}
+        >
+          Results
+        </Text>
+      </View>
       <StatusBar style="auto" />
     </View>
   );

@@ -13,6 +13,7 @@ import {
 import React, { useState } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const DonationsScreen = ({ navigation }) => {
   return (
@@ -46,18 +47,17 @@ const DonationsScreen = ({ navigation }) => {
             padding: 7,
           }}
         >
-          Donations
+          Donate
         </Text>
         <TouchableOpacity>
           <Text style={{ marginTop: 10 }}>
-            <Ionicons name="md-save-outline" size={28} color="#C8C8C8" />
+            <MaterialIcons name="history" size={32} color="#C8C8C8" />
           </Text>
         </TouchableOpacity>
       </View>
       <ScrollView
         style={{
           width: "100%",
-          // height: 800,
           top: 50,
         }}
       >
@@ -70,7 +70,7 @@ const DonationsScreen = ({ navigation }) => {
             textAlign: "center",
           }}
         >
-          Enter your card details!
+          Enter receiving card details!
         </Text>
         <ImageBackground
           borderRadius={10}
@@ -144,38 +144,12 @@ const DonationsScreen = ({ navigation }) => {
         </ImageBackground>
         <View
           style={{
-            margin: 150,
+            margin: 190,
             // flexDirection: "row",
             // justifyContent: "space-evenly",
           }}
         >
           <TouchableOpacity
-            style={{
-              borderColor: "#929292",
-              borderWidth: 1,
-              borderRadius: 10,
-              width: 200,
-              alignItems: "center",
-              justifyContent: "center",
-              alignSelf: "center",
-              height: 50,
-              padding: 8,
-              top: -120,
-            }}
-          >
-            <Text
-              style={{
-                color: "#C8C8C8",
-                fontSize: 18,
-                letterSpacing: 1.5,
-                padding: 10,
-              }}
-            >
-              Save Details
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("DonatingScreen")}
             style={{
               borderColor: "#929292",
               backgroundColor: "#C8C8C8",
@@ -187,7 +161,7 @@ const DonationsScreen = ({ navigation }) => {
               alignSelf: "center",
               height: 50,
               padding: 8,
-              top: 145,
+              top: 155,
             }}
           >
             <Text
@@ -198,7 +172,7 @@ const DonationsScreen = ({ navigation }) => {
                 padding: 10,
               }}
             >
-              Donate now!
+              Donate!
             </Text>
           </TouchableOpacity>
         </View>

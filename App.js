@@ -41,6 +41,7 @@ import ImamAllChatsScreen from "./screens/ImamAllChatsScreen";
 import ImamMessageChatScreen from "./screens/ImamMessageChatScreen";
 import Addpost from "./screens/Addpost";
 import AddAnnouncement from "./screens/AddAnnouncement";
+import DonatingScreen from "./screens/DonatingScreen";
 
 import Camera from "./screens/Camera";
 import ImagePicker from "./screens/ImagePicker";
@@ -229,6 +230,7 @@ function App() {
         <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
         <Stack.Screen name="QuranScreen" component={QuranScreen} />
         <Stack.Screen name="DonationsScreen" component={DonationsScreen} />
+        <Stack.Screen name="DonatingScreen" component={DonatingScreen} />
         <Stack.Screen name="FormsScreen" component={FormsScreen} />
         <Stack.Screen name="AllChatsScreen" component={AllChatsScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
