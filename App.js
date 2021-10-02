@@ -54,7 +54,6 @@ import DonatingScreen from "./screens/DonatingScreen";
 
 import Camera from "./screens/Camera";
 import ImagePicker from "./screens/ImagePicker";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
