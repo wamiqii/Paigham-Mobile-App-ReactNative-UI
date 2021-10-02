@@ -42,7 +42,7 @@ const ProfilScreen = ({ navigation }) => {
   useEffect(() => {
     firebase
       .database()
-      .ref("users/" + firebase.auth().currentUser.uid)
+      .ref("imams/" + firebase.auth().currentUser.uid)
       .once("value", (snapshot) => {
         setName(snapshot.child("name").val());
         setEmail(snapshot.child("email").val());

@@ -17,11 +17,11 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 const UserFeedScreen = ({ navigation }) => {
-  const [isModalVisible, setModalVisible] = useState(false);
+  // const [isModalVisible, setModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+  // const toggleModal = () => {
+  //   setModalVisible(!isModalVisible);
+  // };
 
   return (
     <View style={{ backgroundColor: "white", height: "100%" }}>
@@ -32,7 +32,7 @@ const UserFeedScreen = ({ navigation }) => {
           flexDirection: "row",
         }}
       >
-        <View style={{ flex: 1 }}>
+        {/* <View style={{ flex: 1 }}>
           <Modal
             backdropColor="black"
             animationIn="slideInDown"
@@ -163,7 +163,7 @@ const UserFeedScreen = ({ navigation }) => {
                       fontSize: 20,
                     }}
                   >
-                    Edit Profile
+                    Profile
                   </Text>
                 </TouchableOpacity>
                 <View
@@ -244,14 +244,20 @@ const UserFeedScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </Modal>
-        </View>
+        </View> */}
         <TouchableOpacity
-          onPress={toggleModal}
+          // onPress={toggleModal}
           style={{ marginTop: 35, marginLeft: 10, marginRight: 10 }}
         >
           <Image
-            style={{ width: 45, height: 45, borderRadius: 50 }}
-            source={require("../assets/userdisplay.jpg")}
+            style={{
+              width: 45,
+              height: 45,
+              borderRadius: 50,
+              borderRadius: 50,
+              backgroundColor: "#E8E8E8",
+            }}
+            source={require("../assets/ImamDP.png")}
           />
         </TouchableOpacity>
         <Text

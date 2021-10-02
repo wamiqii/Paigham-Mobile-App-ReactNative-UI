@@ -9,18 +9,13 @@ import {
   Dimensions,
 } from "react-native";
 import React, { useState } from "react";
-import Modal from "react-native-modal";
-import { FAB } from "react-native-paper";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 
 import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
 
 const UserMapScreen = ({ navigation, route }) => {
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [profilename, setprofilename] = useState(route.params?.profile);
-  console.log(profilename);
+  // const [isModalVisible, setModalVisible] = useState(false);
+  // const [profilename, setprofilename] = useState(route.params?.profile);
 
   const [mosquenamearray, setmosquenamearray] = useState([
     "Usman Block Mosque",
@@ -43,9 +38,9 @@ const UserMapScreen = ({ navigation, route }) => {
     "Rafi Block, Bahria Town Phase-8",
   ]);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+  // const toggleModal = () => {
+  //   setModalVisible(!isModalVisible);
+  // };
 
   mapstyle = [
     {
@@ -252,226 +247,19 @@ const UserMapScreen = ({ navigation, route }) => {
           flexDirection: "row",
         }}
       >
-        <View style={{ flex: 1 }}>
-          <Modal
-            backdropColor="black"
-            animationIn="slideInDown"
-            animationOut="fadeOutUp"
-            backdropOpacity={0.9}
-            isVisible={isModalVisible}
-            style={{ height: "50%" }}
-          >
-            <View
-              style={{ flex: 1, backgroundColor: "transparent", height: "50%" }}
-            >
-              <View
-                style={{
-                  backgroundColor: "#B0B0B0",
-                  height: "24%",
-                  borderRadius: 20,
-                }}
-              >
-                <Text
-                  style={{
-                    borderBottomColor: "white",
-                    borderBottomWidth: 1,
-                    width: "80%",
-                    alignSelf: "center",
-                    textAlign: "center",
-                    fontSize: 25,
-                    fontWeight: "bold",
-                    padding: 5,
-                  }}
-                >
-                  About
-                </Text>
-                <View
-                  style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginVertical: 7,
-                  }}
-                >
-                  <Image
-                    style={{ width: 45, height: 45, borderRadius: 50 }}
-                    source={require("../assets/userdisplay.jpg")}
-                  />
-                </View>
-                <Text
-                  style={{
-                    justifyContent: "center",
-                    alignSelf: "center",
-                    textAlign: "center",
-                    fontSize: 22,
-                  }}
-                >
-                  Wamiq Waheed
-                </Text>
-                <View
-                  style={{
-                    borderBottomColor: "white",
-                    borderBottomWidth: 1,
-                    width: "80%",
-                    alignSelf: "center",
-                  }}
-                />
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("AllChatsScreen")}
-                  style={{
-                    backgroundColor: "#1B1B1B",
-                    width: "80%",
-                    justifyContent: "center",
-                    alignSelf: "center",
-                    borderRadius: 10,
-                    marginVertical: 10,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      padding: 10,
-                      justifyContent: "center",
-                      alignSelf: "center",
-                      textAlign: "center",
-                      fontSize: 20,
-                    }}
-                  >
-                    Chats
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  backgroundColor: "#B0B0B0",
-                  height: "31%",
-                  marginVertical: 20,
-                  borderRadius: 20,
-                }}
-              >
-                <Text
-                  style={{
-                    borderBottomColor: "white",
-                    borderBottomWidth: 1,
-                    width: "80%",
-                    alignSelf: "center",
-                    textAlign: "center",
-                    fontSize: 25,
-                    fontWeight: "bold",
-                    padding: 5,
-                  }}
-                >
-                  Settings
-                </Text>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("ProfileScreen")}
-                  style={{
-                    backgroundColor: "#1B1B1B",
-                    width: "80%",
-                    justifyContent: "center",
-                    alignSelf: "center",
-                    borderRadius: 10,
-                    marginVertical: 10,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      padding: 10,
-                      justifyContent: "center",
-                      alignSelf: "center",
-                      textAlign: "center",
-                      fontSize: 20,
-                    }}
-                  >
-                    Edit Profile
-                  </Text>
-                </TouchableOpacity>
-                <View
-                  style={{
-                    borderBottomColor: "white",
-                    borderBottomWidth: 1,
-                    width: "80%",
-                    alignSelf: "center",
-                  }}
-                />
-                <View
-                  style={{
-                    backgroundColor: "#1B1B1B",
-                    width: "80%",
-                    justifyContent: "center",
-                    alignSelf: "center",
-                    borderRadius: 10,
-                    marginVertical: 10,
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    padding: 7,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      padding: 10,
-                      justifyContent: "center",
-                      alignSelf: "center",
-                      textAlign: "center",
-                      fontSize: 20,
-                    }}
-                  >
-                    Notifications
-                  </Text>
-                  <Switch trackColor={{ false: "#767577", true: "#81b0ff" }} />
-                </View>
-                <View
-                  style={{
-                    borderBottomColor: "white",
-                    borderBottomWidth: 1,
-                    width: "80%",
-                    alignSelf: "center",
-                  }}
-                />
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("FirstScreen")}
-                  style={{
-                    backgroundColor: "#1B1B1B",
-                    width: "80%",
-                    justifyContent: "center",
-                    alignSelf: "center",
-                    borderRadius: 10,
-                    marginVertical: 10,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      padding: 10,
-                      justifyContent: "center",
-                      alignSelf: "center",
-                      textAlign: "center",
-                      fontSize: 20,
-                    }}
-                  >
-                    Logout
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity onPress={toggleModal}>
-                <FontAwesome
-                  name="close"
-                  size={30}
-                  color="white"
-                  style={{ textAlign: "center" }}
-                />
-              </TouchableOpacity>
-            </View>
-          </Modal>
-        </View>
         <TouchableOpacity
-          onPress={toggleModal}
+          // onPress={toggleModal}
           style={{ marginTop: 35, marginLeft: 10, marginRight: 10 }}
         >
           <Image
-            style={{ width: 45, height: 45, borderRadius: 50 }}
-            source={require("../assets/userdisplay.jpg")}
+            style={{
+              width: 45,
+              height: 45,
+              borderRadius: 50,
+              borderRadius: 50,
+              backgroundColor: "#E8E8E8",
+            }}
+            source={require("../assets/ImamDP.png")}
           />
         </TouchableOpacity>
         <Text

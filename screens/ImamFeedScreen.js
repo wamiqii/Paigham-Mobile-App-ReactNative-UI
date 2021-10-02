@@ -18,11 +18,11 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 const ImamFeedScreen = ({ navigation }) => {
-  const [isModalVisible, setModalVisible] = useState(false);
+  // const [isModalVisible, setModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+  // const toggleModal = () => {
+  //   setModalVisible(!isModalVisible);
+  // };
 
   return (
     <View>
@@ -33,7 +33,7 @@ const ImamFeedScreen = ({ navigation }) => {
           flexDirection: "row",
         }}
       >
-        <View style={{ flex: 1 }}>
+        {/* <View style={{ flex: 1 }}>
           <Modal
             backdropColor="black"
             animationIn="slideInDown"
@@ -169,7 +169,7 @@ const ImamFeedScreen = ({ navigation }) => {
                       fontSize: 20,
                     }}
                   >
-                    Edit Profile
+                    Profile
                   </Text>
                 </TouchableOpacity>
                 <View
@@ -282,9 +282,9 @@ const ImamFeedScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </Modal>
-        </View>
+        </View> */}
         <TouchableOpacity
-          onPress={toggleModal}
+          // onPress={toggleModal}
           style={{ marginTop: 35, marginLeft: 10, marginRight: 10 }}
         >
           <Image

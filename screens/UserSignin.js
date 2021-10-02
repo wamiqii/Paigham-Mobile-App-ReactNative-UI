@@ -6,17 +6,34 @@ import {
   ImageBackground,
   TextInput,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import firebase from "firebase";
+import { ActivityIndicator } from "react-native-paper";
 
 import { AntDesign } from "@expo/vector-icons";
-import { EvilIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 const UserSignup = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState(false);
+
+  const signin = () => {
+    setLoader(true);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        setLoader(false);
+        navigation.navigate("Maps");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <ImageBackground
       source={require("../assets/userscreenimage.jpg")}
@@ -125,6 +142,7 @@ const UserSignup = ({ navigation }) => {
             style={{ padding: 13, marginTop: 15 }}
           />
           <TextInput
+            autoCapitalize="none"
             style={{
               borderBottomColor: "white",
               borderBottomWidth: 1,
@@ -139,6 +157,8 @@ const UserSignup = ({ navigation }) => {
             keyboardType="email-address"
             placeholder="Email"
             placeholderTextColor="white"
+            onChangeText={(email) => setEmail(email)}
+            value={email}
           />
         </View>
         <View
@@ -153,6 +173,7 @@ const UserSignup = ({ navigation }) => {
             style={{ padding: 13, marginTop: 15 }}
           />
           <TextInput
+            autoCapitalize="none"
             style={{
               borderBottomColor: "white",
               borderBottomWidth: 1,
@@ -167,41 +188,61 @@ const UserSignup = ({ navigation }) => {
             secureTextEntry={true}
             placeholder="Password"
             placeholderTextColor="white"
+            onChangeText={(password) => setPassword(password)}
+            value={password}
           />
         </View>
       </View>
       <View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Maps")}
-          style={{
-            backgroundColor: "rgba(29,31,30,0.4)",
-            justifyContent: "center",
-            alignContent: "center",
-            marginTop: 40,
-            height: 60,
-            width: 220,
-            borderRadius: 20,
-            marginRight: 10,
-            flexDirection: "row",
-          }}
-        >
-          <Text
+        {loader ? (
+          <View
             style={{
-              color: "white",
-              alignSelf: "center",
-              fontSize: 25,
-              padding: 15,
+              backgroundColor: "rgba(29,31,30,0.4)",
+              justifyContent: "center",
+              alignContent: "center",
+              marginTop: 40,
+              height: 60,
+              width: 220,
+              borderRadius: 20,
+              marginRight: 10,
+              flexDirection: "row",
             }}
           >
-            Sign in!
-          </Text>
-          <AntDesign
-            name="login"
-            size={24}
-            color="white"
-            style={{ padding: 5, marginTop: 12 }}
-          />
-        </TouchableOpacity>
+            <ActivityIndicator color="white" size="small" />
+          </View>
+        ) : (
+          <TouchableOpacity
+            onPress={signin}
+            style={{
+              backgroundColor: "rgba(29,31,30,0.4)",
+              justifyContent: "center",
+              alignContent: "center",
+              marginTop: 40,
+              height: 60,
+              width: 220,
+              borderRadius: 20,
+              marginRight: 10,
+              flexDirection: "row",
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                alignSelf: "center",
+                fontSize: 25,
+                padding: 15,
+              }}
+            >
+              Sign in!
+            </Text>
+            <AntDesign
+              name="login"
+              size={24}
+              color="white"
+              style={{ padding: 5, marginTop: 12 }}
+            />
+          </TouchableOpacity>
+        )}
       </View>
       <StatusBar style="auto" />
     </ImageBackground>

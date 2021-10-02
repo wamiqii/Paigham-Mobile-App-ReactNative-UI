@@ -10,28 +10,25 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { FAB } from "react-native-paper";
-import NewConversation from "./NewConversation";
 
 import { Ionicons } from "@expo/vector-icons";
 
 const Messages = [
   {
     id: "1",
-    userName: "Wamiq Waheed",
-    userImg: require("../assets/userdisplay.jpg"),
-    messageTime: "4 mins ago",
-    messageText: "View messages",
+    userName: "Muhammad Ali",
+    userImg: require("../assets/ImamDP.png"),
+    messageText: "Imam",
   },
   {
     id: "2",
-    userName: "John Doe",
-    userImg: require("../assets/ImamDP.png"),
-    messageTime: "2 hours ago",
-    messageText: "View messages",
+    userName: "Taha Zahir",
+    userImg: require("../assets/Taha.jpg"),
+    messageText: "User",
   },
 ];
 
-const ImamAllChatsScreen = ({ navigation, route }) => {
+const NewConversation = ({ navigation, route }) => {
   const [msglast, setmsglast] = useState(route.params?.msg);
 
   return (
@@ -63,10 +60,10 @@ const ImamAllChatsScreen = ({ navigation, route }) => {
             fontWeight: "bold",
             textAlign: "center",
             padding: 7,
-            marginRight: 100,
+            marginRight: 80,
           }}
         >
-          Conversations
+          New Conversation
         </Text>
       </View>
 
@@ -85,7 +82,7 @@ const ImamAllChatsScreen = ({ navigation, route }) => {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("ImamMessageChatScreen", {
+                navigation.navigate("MessageChatScreen", {
                   userName: item.userName,
                   userImg: item.userImg,
                 })
@@ -131,9 +128,6 @@ const ImamAllChatsScreen = ({ navigation, route }) => {
                     <Text style={{ fontSize: 14, fontWeight: "bold" }}>
                       {item.userName}
                     </Text>
-                    <Text style={{ fontSize: 12, color: "#666" }}>
-                      {item.messageTime}
-                    </Text>
                   </View>
                   <Text
                     style={{
@@ -150,30 +144,8 @@ const ImamAllChatsScreen = ({ navigation, route }) => {
           )}
         />
       </View>
-
-      <View
-        style={{
-          // flex: 1,
-          bottom: 0,
-        }}
-      >
-        <FAB
-          onPress={() => navigation.navigate("NewConversation")}
-          style={{
-            position: "absolute",
-            margin: 16,
-            left: 110,
-            bottom: 0,
-            backgroundColor: "#3D73AF",
-            padding: 2,
-          }}
-          color="white"
-          large
-          icon="plus"
-        />
-      </View>
     </View>
   );
 };
 
-export default ImamAllChatsScreen;
+export default NewConversation;

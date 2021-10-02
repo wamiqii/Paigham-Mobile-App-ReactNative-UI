@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { FAB } from "react-native-paper";
 
 import { Ionicons } from "@expo/vector-icons";
+import NewConversation from "./NewConversation";
 
 const Messages = [
   {
@@ -157,6 +158,7 @@ const AllChatsScreen = ({ navigation, route }) => {
         }}
       >
         <FAB
+          onPress={() => navigation.navigate("NewConversation")}
           style={{
             position: "absolute",
             margin: 16,

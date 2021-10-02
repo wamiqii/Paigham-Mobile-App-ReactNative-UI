@@ -7,10 +7,15 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
+import { UserProvider } from "./context/UserContext";
+import { FirebaseProvider } from "./context/FirebaseContext";
+
+import { UserContext } from "./context/UserContext";
 
 import ImamAuthPage from "./screens/ImamAuthPage";
 import UserAuthPage from "./screens/UserAuthPage";
@@ -20,11 +25,13 @@ import UserSignup from "./screens/UserSignup";
 import UserSignin from "./screens/UserSignin";
 import UserMapScreen from "./screens/UserMapScreen";
 import UserFeedScreen from "./screens/UserFeedScreen";
+import Options from "./screens/Options";
 import DashboardScreen from "./screens/DaashboardScreen";
 import QuranScreen from "./screens/QuranScreen";
 import DonationsScreen from "./screens/DonationsScreen";
 import FormsScreen from "./screens/FormsScreen";
 import AllChatsScreen from "./screens/AllChatsScreen";
+import NewConversation from "./screens/NewConversation";
 import MessageChatScreen from "./screens/MessageChatScreen";
 import ProfileScreen from "./screens/ProfilScreen";
 import QiblaScreen from "./screens/QiblaScreen";
@@ -39,6 +46,8 @@ import ImamMosqueInfoScreen from "./screens/ImamMosqueInfoScreen";
 import ImamProfileScreen from "./screens/ImamProfileScreen";
 import ImamAllChatsScreen from "./screens/ImamAllChatsScreen";
 import ImamMessageChatScreen from "./screens/ImamMessageChatScreen";
+import ImamOptions from "./screens/ImamOptions";
+import ImamProfile from "./screens/ImamProfile";
 import Addpost from "./screens/Addpost";
 import AddAnnouncement from "./screens/AddAnnouncement";
 import DonatingScreen from "./screens/DonatingScreen";
@@ -48,6 +57,7 @@ import ImagePicker from "./screens/ImagePicker";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 const FirstScreen = ({ navigation }) => {
   return (
@@ -137,7 +147,7 @@ const FirstScreen = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </ImageBackground>
   );
 };
@@ -175,6 +185,16 @@ const BottomTabUser = () => {
           ),
         }}
       />
+      <Tab.Screen
+        name="Options"
+        component={Options}
+        options={{
+          tabBarColor: "black",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="options" size={24} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
@@ -208,6 +228,16 @@ const BottomTabImam = () => {
           ),
         }}
       />
+      <Tab.Screen
+        name="ImamOptions"
+        component={ImamOptions}
+        options={{
+          tabBarColor: "black",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="options" size={24} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
@@ -217,53 +247,74 @@ const Tab = createMaterialBottomTabNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="FirstScreen" headerMode="none">
-        <Stack.Screen name="FirstScreen" component={FirstScreen} />
-        <Stack.Screen name="ImamAuth" component={ImamAuthPage} />
-        <Stack.Screen name="UserAuth" component={UserAuthPage} />
-        <Stack.Screen name="ImamSignup" component={ImamSignup} />
-        <Stack.Screen name="ImamSignin" component={ImamSignin} />
-        <Stack.Screen name="UserSignup" component={UserSignup} />
-        <Stack.Screen name="UserSignin" component={UserSignin} />
-        <Stack.Screen name="Maps" component={BottomTabUser} />
-        <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
-        <Stack.Screen name="QuranScreen" component={QuranScreen} />
-        <Stack.Screen name="DonationsScreen" component={DonationsScreen} />
-        <Stack.Screen name="DonatingScreen" component={DonatingScreen} />
-        <Stack.Screen name="FormsScreen" component={FormsScreen} />
-        <Stack.Screen name="AllChatsScreen" component={AllChatsScreen} />
-        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-        <Stack.Screen name="QiblaScreen" component={QiblaScreen} />
-        <Stack.Screen name="SearchScreen" component={SearchScreen} />
-        <Stack.Screen name="SurahQuranScreen" component={SurahQuranScreen} />
-        <Stack.Screen name="MosqueInfoScreen" component={MosqueInfoScreen} />
-        <Stack.Screen name="ImamFeedScreen" component={BottomTabImam} />
-        <Stack.Screen name="ImamProfileScreen" component={ImamProfileScreen} />
-        <Stack.Screen
-          name="AnnouncementScreen"
-          component={AnnouncementScreen}
-        />
-        <Stack.Screen name="ImamAnnouncement" component={ImamAnnouncement} />
-        <Stack.Screen
-          name="ImamMosqueInfoScreen"
-          component={ImamMosqueInfoScreen}
-        />
-        <Stack.Screen name="MessageChatScreen" component={MessageChatScreen} />
-        <Stack.Screen
-          name="ImamAllChatsScreen"
-          component={ImamAllChatsScreen}
-        />
-        <Stack.Screen
-          name="ImamMessageChatScreen"
-          component={ImamMessageChatScreen}
-        />
-        <Stack.Screen name="Addpost" component={Addpost} />
-        <Stack.Screen name="AddAnnouncement" component={AddAnnouncement} />
-        <Stack.Screen name="Camera" component={Camera} />
-        <Stack.Screen name="ImagePicker" component={ImagePicker} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <FirebaseProvider>
+      <UserProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="FirstScreen" headerMode="none">
+            <Stack.Screen name="FirstScreen" component={FirstScreen} />
+            <Stack.Screen name="ImamAuth" component={ImamAuthPage} />
+            <Stack.Screen name="UserAuth" component={UserAuthPage} />
+            <Stack.Screen name="ImamSignup" component={ImamSignup} />
+            <Stack.Screen name="ImamSignin" component={ImamSignin} />
+            <Stack.Screen name="UserSignup" component={UserSignup} />
+            <Stack.Screen name="UserSignin" component={UserSignin} />
+            <Stack.Screen name="Maps" component={BottomTabUser} />
+            <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
+            <Stack.Screen name="QuranScreen" component={QuranScreen} />
+            <Stack.Screen name="DonationsScreen" component={DonationsScreen} />
+            <Stack.Screen name="DonatingScreen" component={DonatingScreen} />
+            <Stack.Screen name="FormsScreen" component={FormsScreen} />
+            <Stack.Screen name="AllChatsScreen" component={AllChatsScreen} />
+            <Stack.Screen name="NewConversation" component={NewConversation} />
+            <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+            <Stack.Screen name="ImamProfile" component={ImamProfile} />
+            <Stack.Screen name="QiblaScreen" component={QiblaScreen} />
+            <Stack.Screen name="SearchScreen" component={SearchScreen} />
+            <Stack.Screen
+              name="SurahQuranScreen"
+              component={SurahQuranScreen}
+            />
+            <Stack.Screen
+              name="MosqueInfoScreen"
+              component={MosqueInfoScreen}
+            />
+            <Stack.Screen name="ImamFeedScreen" component={BottomTabImam} />
+            <Stack.Screen
+              name="ImamProfileScreen"
+              component={ImamProfileScreen}
+            />
+            <Stack.Screen
+              name="AnnouncementScreen"
+              component={AnnouncementScreen}
+            />
+            <Stack.Screen
+              name="ImamAnnouncement"
+              component={ImamAnnouncement}
+            />
+            <Stack.Screen
+              name="ImamMosqueInfoScreen"
+              component={ImamMosqueInfoScreen}
+            />
+            <Stack.Screen
+              name="MessageChatScreen"
+              component={MessageChatScreen}
+            />
+            <Stack.Screen
+              name="ImamAllChatsScreen"
+              component={ImamAllChatsScreen}
+            />
+            <Stack.Screen
+              name="ImamMessageChatScreen"
+              component={ImamMessageChatScreen}
+            />
+            <Stack.Screen name="Addpost" component={Addpost} />
+            <Stack.Screen name="AddAnnouncement" component={AddAnnouncement} />
+            <Stack.Screen name="Camera" component={Camera} />
+            <Stack.Screen name="ImagePicker" component={ImagePicker} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </UserProvider>
+    </FirebaseProvider>
   );
 }
 
