@@ -4,13 +4,14 @@ import {
   Button,
   View,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   ImageBackground,
   ScrollView,
   TextInput,
   FlatList,
-  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
+import { ActivityIndicator } from "react-native-paper";
 
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -21,9 +22,11 @@ const QuranScreen = ({ navigation }) => {
   const [searchdata, setsearchdata] = useState([]);
   // const [surahindex, setsurahindex] = useState(0);
   const [tryvar, settryvar] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   const fetchdata = () => {
     setsurahdata([]);
+    setLoader(true);
     fetch(
       "https://raw.githubusercontent.com/semarketir/quranjson/master/source/surah.json",
       {
@@ -37,6 +40,7 @@ const QuranScreen = ({ navigation }) => {
           setsurahdata((prev) => [...prev, resultJson[i]]);
           settryvar((prev) => [...prev, resultJson[i].title]);
         }
+        setLoader(false);
       })
       .catch((err) => console.error(err));
   };
@@ -165,65 +169,102 @@ const QuranScreen = ({ navigation }) => {
           elevation: 23,
         }}
       >
-        <View>
-          <Text
-            style={{
-              color: "#B7AA9E",
-              fontSize: 25,
-              fontWeight: "bold",
-              textAlign: "center",
-              paddingTop: 8,
-              borderBottomWidth: 3,
-              borderBottomColor: "#B7AA9E",
-              borderRadius: 5,
-              width: "40%",
-              alignSelf: "center",
-            }}
-          >
-            Surah Index
-          </Text>
+        {loader ? (
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
+              backgroundColor: "rgba(29,31,30,0.4)",
               justifyContent: "center",
-              marginTop: 15,
+              alignSelf: "center",
+              marginTop: 250,
+              height: 220,
+              width: 220,
+              borderRadius: 30,
             }}
           >
-            <FontAwesome
-              name="search"
-              size={20}
-              color="#B7AA9E"
-              style={{ right: -25, top: 1 }}
-            />
-            <TextInput
-              placeholder="Search Surah"
-              placeholderTextColor="#B7AA9E"
-              onChangeText={handlesearch}
+            <View>
+              <TouchableWithoutFeedback
+                style={{
+                  backgroundColor: "rgba(29,31,30,0.5)",
+                  // marginTop: 150,
+                  borderRadius: 100,
+                  width: "50%",
+                }}
+              >
+                <Text
+                  style={{
+                    color: "#B7AA9E",
+                    alignSelf: "center",
+                    fontSize: 55,
+                    padding: 25,
+                  }}
+                >
+                  قرآن
+                </Text>
+              </TouchableWithoutFeedback>
+            </View>
+            <ActivityIndicator color="#B7AA9E" size="small" />
+          </View>
+        ) : (
+          <View>
+            <Text
               style={{
-                alignSelf: "center",
-                fontSize: 22,
-                textAlign: "center",
-                borderWidth: 1,
-                borderColor: "#B7AA9E",
-                borderRadius: 5,
-                padding: 7,
-                width: "80%",
                 color: "#B7AA9E",
-                left: -8,
+                fontSize: 25,
+                fontWeight: "bold",
+                textAlign: "center",
+                paddingTop: 8,
+                borderBottomWidth: 3,
+                borderBottomColor: "#B7AA9E",
+                borderRadius: 5,
+                width: "40%",
+                alignSelf: "center",
               }}
+            >
+              Surah Index
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: 15,
+              }}
+            >
+              <FontAwesome
+                name="search"
+                size={20}
+                color="#B7AA9E"
+                style={{ right: -25, top: 1 }}
+              />
+              <TextInput
+                placeholder="Search Surah"
+                placeholderTextColor="#B7AA9E"
+                onChangeText={handlesearch}
+                style={{
+                  alignSelf: "center",
+                  fontSize: 22,
+                  textAlign: "center",
+                  borderWidth: 1,
+                  borderColor: "#B7AA9E",
+                  borderRadius: 5,
+                  padding: 7,
+                  width: "80%",
+                  color: "#B7AA9E",
+                  left: -8,
+                }}
+              />
+            </View>
+            <FlatList
+              style={{ height: "85%" }}
+              keyExtractor={(item, pass) => "Key" + pass}
+              data={surahdata}
+              renderItem={({ item }) => searchquery(item)}
             />
           </View>
-          <FlatList
-            style={{ height: "85%" }}
-            keyExtractor={(item, pass) => "Key" + pass}
-            data={surahdata}
-            renderItem={({ item }) => searchquery(item)}
-          />
-        </View>
+        )}
       </View>
 
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </ImageBackground>
   );
 };

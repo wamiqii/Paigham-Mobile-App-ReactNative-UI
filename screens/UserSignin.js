@@ -19,6 +19,7 @@ const UserSignup = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
+  const [errorshow, setErrorshow] = useState("");
 
   const signin = () => {
     setLoader(true);
@@ -30,7 +31,8 @@ const UserSignup = ({ navigation }) => {
         navigation.navigate("Maps");
       })
       .catch((error) => {
-        console.log(error.message);
+        setLoader(false);
+        setErrorshow(error.message);
       });
   };
 
@@ -191,6 +193,18 @@ const UserSignup = ({ navigation }) => {
             onChangeText={(password) => setPassword(password)}
             value={password}
           />
+        </View>
+        <View>
+          <Text
+            style={{
+              color: "red",
+              alignSelf: "center",
+              fontSize: 15,
+              padding: 7,
+            }}
+          >
+            {errorshow}
+          </Text>
         </View>
       </View>
       <View>

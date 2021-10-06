@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
   Image,
-  ScrollView,
+  FlatList,
   TextInput,
 } from "react-native";
 import React, { useState } from "react";
@@ -14,6 +14,20 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
 const SearchScreen = ({ navigation }) => {
+  const Messages = [
+    {
+      id: "1",
+      userName: "Muhammad Ali",
+      userImg: require("../assets/ImamDP.png"),
+      messageText: "Imam",
+    },
+    {
+      id: "2",
+      userName: "Taha Zahir",
+      userImg: require("../assets/Taha.jpg"),
+      messageText: "User",
+    },
+  ];
   return (
     <View style={{ backgroundColor: "#F4F4F4", height: "100%" }}>
       <View
@@ -64,14 +78,14 @@ const SearchScreen = ({ navigation }) => {
           style={{ right: -25, top: 1 }}
         />
         <TextInput
-          placeholder="Search Imam/Users"
+          placeholder="Imam/Users"
           placeholderTextColor="#3D73AF"
           style={{
             alignSelf: "center",
             fontSize: 22,
             textAlign: "center",
-            borderWidth: 1,
-            borderColor: "#3D73AF",
+            borderBottomWidth: 1,
+            borderBottomColor: "#3D73AF",
             borderRadius: 5,
             padding: 7,
             width: "80%",
@@ -82,32 +96,80 @@ const SearchScreen = ({ navigation }) => {
       </View>
       <View
         style={{
-          backgroundColor: "rgba(0,0,0,0.1)",
-          borderColor: "#3D73AF",
-          borderWidth: 2,
-          width: "90%",
-          height: "80%",
-          margin: 50,
-          alignSelf: "center",
-          borderRadius: 15,
-          top: -30,
+          flex: 1,
+          paddingLeft: 20,
+          paddingRight: 20,
+          alignItems: "center",
+          backgroundColor: "#F4F4F4",
         }}
       >
-        <Text
-          style={{
-            textAlign: "center",
-            fontSize: 24,
-            color: "#3D73AF",
-            borderBottomColor: "#3D73AF",
-            borderBottomWidth: 2,
-            borderBottomRightRadius: 10,
-            borderBottomLeftRadius: 10,
-            width: "30%",
-            alignSelf: "center",
-          }}
-        >
-          Results
-        </Text>
+        <FlatList
+          data={Messages}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("MessageChatScreen", {
+                  userName: item.userName,
+                  userImg: item.userImg,
+                })
+              }
+              style={{ width: "100%" }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <View style={{ paddingTop: 15, paddingBottom: 15 }}>
+                  <Image
+                    style={{
+                      width: 55,
+                      height: 55,
+                      backgroundColor: "white",
+                      borderRadius: 50,
+                    }}
+                    source={item.userImg}
+                  />
+                </View>
+                <View
+                  style={{
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    padding: 15,
+                    paddingLeft: 0,
+                    marginLeft: 10,
+                    width: "84%",
+                    borderBottomWidth: 1,
+                    borderBottomColor: "#cccccc",
+                  }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginBottom: 5,
+                    }}
+                  >
+                    <Text style={{ fontSize: 14, fontWeight: "bold" }}>
+                      {item.userName}
+                    </Text>
+                  </View>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontStyle: "italic",
+                      color: "#333333",
+                    }}
+                  >
+                    {item.messageText}
+                  </Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
       </View>
       <StatusBar style="auto" />
     </View>

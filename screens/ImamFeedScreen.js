@@ -283,21 +283,28 @@ const ImamFeedScreen = ({ navigation }) => {
             </View>
           </Modal>
         </View> */}
-        <TouchableOpacity
-          // onPress={toggleModal}
-          style={{ marginTop: 35, marginLeft: 10, marginRight: 10 }}
-        >
-          <Image
+        <View>
+          <TouchableOpacity
             style={{
-              width: 45,
-              height: 45,
-              borderRadius: 50,
-              backgroundColor: "#E8E8E8",
+              // backgroundColor: "rgba(29,31,30,0.2)",
+              marginTop: 18,
+              marginLeft: 155,
+              borderRadius: 100,
             }}
-            source={require("../assets/ImamDP.png")}
-          />
-        </TouchableOpacity>
-        <Text
+          >
+            <Text
+              style={{
+                color: "white",
+                alignSelf: "center",
+                fontSize: 45,
+                padding: 10,
+              }}
+            >
+              پیغام
+            </Text>
+          </TouchableOpacity>
+        </View>
+        {/* <Text
           style={{
             color: "white",
             fontSize: 25,
@@ -311,11 +318,11 @@ const ImamFeedScreen = ({ navigation }) => {
           }}
         >
           Paigham
-        </Text>
+        </Text> */}
         <TouchableOpacity
           onPress={() => navigation.navigate("DashboardScreen")}
           style={{
-            marginLeft: 60,
+            marginLeft: 120,
             marginRight: 50,
             alignSelf: "center",
             marginTop: 30,

@@ -29,6 +29,7 @@ const UserSignup = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
+  const [errorshow, setErrorshow] = useState("");
 
   const getPermission = async () => {
     if (Platform.OS !== "web") {
@@ -85,7 +86,9 @@ const UserSignup = ({ navigation }) => {
         navigation.navigate("Maps");
       })
       .catch((error) => {
-        console.log(error.message);
+        setLoader(false);
+        // alert("Email/Password incorrect! Try Again!");
+        setErrorshow(error.message);
       });
   };
 
@@ -316,11 +319,23 @@ const UserSignup = ({ navigation }) => {
               left: 10,
             }}
             secureTextEntry={true}
-            placeholder="Password"
+            placeholder="Password (Atleast 6 characters)"
             placeholderTextColor="white"
             onChangeText={(password) => setPassword(password)}
             value={password}
           />
+        </View>
+        <View>
+          <Text
+            style={{
+              color: "red",
+              alignSelf: "center",
+              fontSize: 15,
+              padding: 15,
+            }}
+          >
+            {errorshow}
+          </Text>
         </View>
       </View>
       <View>

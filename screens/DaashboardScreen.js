@@ -157,6 +157,7 @@ const DashboardScreen = ({ navigation }) => {
           </Card>
         </View>
       </ScrollView>
+      <StatusBar style="light" />
     </ImageBackground>
   );
 };

@@ -9,7 +9,6 @@ import {
   FlatList,
 } from "react-native";
 import React, { useState } from "react";
-import { FAB } from "react-native-paper";
 
 import { Ionicons } from "@expo/vector-icons";
 
